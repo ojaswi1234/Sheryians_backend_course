@@ -20,14 +20,35 @@ app.get('/', (req, res) => {
 
 app.get('/files/:filename', (req, res) => {
    fs.readFile(`./files/${req.params.filename}`,(err, filedata) => {
-    res.render('show');
+    res.render('show', {filename: req.params.filename,filedata: filedata });
    });
 }); 
-app.post('/create',(req, res) =>{
+app.post('/create',(req, res) => {
     fs.writeFile(`./files/${req.body.title.split(' ').join('')}.txt`, req.body.details, (err) =>{
         res.redirect("/");
     })
 });
+
+app.get('/edit/:filename', (req, res) => {
+    res.render('edit', {filename: req.params.filename});    
+});
+
+app.post('/edit', (req, res) => {
+    fs.rename(`./files/${req.body.oldname}`,`./files/${req.body.newname}`,(err) => {
+        res.redirect("/");
+    });
+});
+
+app.post('/delete/:filename', (req, res) => {
+    fs.rm(`./files/${req.params.filename}`,(err) => {
+        if(err){
+            res.send("Error in deleting the file");
+        }else{
+            res.redirect("/");
+        }
+    });
+});
+
 /*
 app.get('/profile/:name',(req, res) => {
     res.send(`Welcome ${req.params.name}`);

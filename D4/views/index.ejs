@@ -4,27 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/styles.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white">
-    <div class="main w-full min-h-screen bg-zinc-900">
-        <div class="form p-10">
-            <form action="/create" method="post" class="text-white">
-                <input class="block w-full rounded-md  outline-none px-5 py-2 bg-zinc-800" type="text" placeholder="Title goes here" name="title"/>
-                <textarea class="block w-full  px-5 py-2 resize-none bg-zinc-800 rounded-md mt-2" placeholder="Write Your Task details..." name="details"></textarea>
-                <input class="mt-2 bg-yellow-800  px-5 px-2 rounded-md" type="submit" value="Add Task"/> 
+<body>
+    <div class="main w-full min-h-screen bg-yellow-200" >
+        <h1 class="flex justify-center translate-y-5 py-4 text-xl sm:text-3xl" id="h">TASK MANAGEMENT SYSTEM</h1>
+        <div class="form p-10 ">
+            <form action="/create" method="post" class="text-white border-4 border-dotted p-10 border-black">
+                <input class="block w-3/4 rounded-md outline-none px-5 py-2 bg-zinc-800 sm:w-2/3" type="text" placeholder="Title goes here" name="title"/>
+                <textarea class="block w-full  px-5 py-2 resize-none bg-zinc-800 rounded-md mt-2 sm:w-4/5" placeholder="Write Your Task details..." name="details"></textarea>
+                <button class="mt-2 bg-gradient-to-tr from-blue-500 to-green-500 px-5 py-2 rounded-md transition-all duration-300 transform hover:scale-125 hover:bg-gradient-to-tl hover:shadow-lg flex items-center space-x-2" type="submit">
+                    <i class="ri-add-line transition-all duration-100 hover:rotate-180 "></i>
+                    <span class="text-white">Add Task</span>
+                </button>
             </form>
         </div>
         <div class="tasks p-10 flex gap-4 flex-wrap p-10">   <!-- = sirf tabh laga na jab kuch print kerna ho werna functions ki liye toh <% %> me hi likhna hai code -->
             <% if(typeof files !== 'undefined' && files.length > 0) { %>
             <% files.forEach(function(val){ %>
-                <div class="task min-w-72 px-3 py-4 bg-zinc-800 ">
+                <div class="task min-w-72 px-3 py-4 bg-zinc-800 rounded-md">
                     <h1 class="text-white text-3xl tracking-tighter"><%= val %></h1>
-                <a href="/files/<%= val %> " class="text-blue-500  inline-block mt-3"><%= val %></a>
+                    <div class="flex justify-between">
+                <a href="/files/<%= val %> " class="text-blue-500 inline-block ml-1 mt-1">Read more...</a>
+                <a href="/edit/<%= val %>" class=" w-fit text-blue-500">Edit <i class="ri-edit-line"></i></a>
+                </div>
+                <form action="/delete/<%= val %>" method="post">
+                    <button class="mt-5 bg-gradient-to-r from-red-500 to-purple-500 px-5 py-2 rounded-md text-black " type="submit" >
+                        Delete <i class="ri-delete-bin-line"></i>
+                    </button>
+                </form>
                 </div>
             <% })  %>
             <% } else{ %>
-                <h3 class="text-zinc-400">No Task...</h3>
+                <h3 class="text-zinc-900 font-bold">No Tasks...</h3>
                 <% } %>
 
         </div>
