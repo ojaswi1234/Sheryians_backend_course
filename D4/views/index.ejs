@@ -14,12 +14,12 @@
     <div class="main w-full min-h-screen bg-yellow-200" >
         <h1 class="flex justify-center translate-y-5 py-4 text-xl sm:text-3xl" id="h">TASK MANAGEMENT SYSTEM</h1>
         <div class="form p-10 ">
-            <form action="/create" method="post" class="text-white border-4 border-dotted p-10 border-black">
-                <input class="block w-3/4 rounded-md outline-none px-5 py-2 bg-zinc-800 sm:w-2/3" type="text" placeholder="Title goes here" name="title"/>
-                <textarea class="block w-full  px-5 py-2 resize-none bg-zinc-800 rounded-md mt-2 sm:w-4/5" placeholder="Write Your Task details..." name="details"></textarea>
+            <form action="/create" method="post" class="text-white border-4 border-dotted p-10 border-black ">
+                <input class="block w-3/4 rounded-md outline-none px-5 py-2 bg-zinc-800 sm:w-2/3  font-serif" type="text" placeholder="Title goes here" name="title"/>
+                <textarea class="block w-full  px-5 py-2 resize-none bg-zinc-800 rounded-md mt-2 sm:w-4/5 font-serif" placeholder="Write Your Task details..." name="details"></textarea>
                 <button class="mt-2 bg-gradient-to-tr from-blue-500 to-green-500 px-5 py-2 rounded-md transition-all duration-300 transform hover:scale-125 hover:bg-gradient-to-tl hover:shadow-lg flex items-center space-x-2" type="submit">
                     <i class="ri-add-line transition-all duration-100 hover:rotate-180 "></i>
-                    <span class="text-white">Add Task</span>
+                    <span class="text-white font-bold">Add Task</span>
                 </button>
             </form>
         </div>
@@ -33,7 +33,7 @@
                 <a href="/edit/<%= val %>" class=" w-fit text-blue-500">Edit <i class="ri-edit-line"></i></a>
                 </div>
                 <form action="/delete/<%= val %>" method="post">
-                    <button class="mt-5 bg-gradient-to-r from-red-500 to-purple-500 px-5 py-2 rounded-md text-black " type="submit" >
+                    <button class="mt-5 bg-gradient-to-tr from-red-600 to-purple-600 px-5 py-2 rounded-md text-black hover:bg-gradient-to-tl from-red-600 to-purple-600 transition-all duration-100  ease-in-out hover:scale-90 font-bold" type="submit" >
                         Delete <i class="ri-delete-bin-line"></i>
                     </button>
                 </form>
