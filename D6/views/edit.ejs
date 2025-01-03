@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>  
+    <div class="w-full h-screen bg-zinc-900 p-10 text-white">
+        <h1 class="text-4xl font-bold text-center tracking-tighter mb-5 bg-gradient-to-br from-yellow-500 to-green-500 bg-clip-text text-transparent">Update User</h1>
+        <hr>
+        <form action="/update/<%= user._id %>" method="post" class="sm:gap-4 sm:flex-none flex flex-col gap-3 pt-4 sm:w-1/2 sm:mx-auto container">
+                <input type="text" value="<%= user.name %>" name="name" id="name" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none" placeholder="Enter your Name..." required>
+                <input type="text" value="<%= user.email %>" name="email" id="email" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none" placeholder="Enter your Email..."required />
+                <input type="text" value="<%= user.imageUrl%>" name="imageUrl" id="imageUrl" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none" placeholder="Enter your Url..." required/>
+                <input type="submit" value="Update User" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none  hover:bg-yellow-600 transition-colors ease-in-out duration-300 hover:cursor-pointer" />
+        </form>
+    </div>
+    <script src="./javascripts/script.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/firstdb', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1:27017/firstdb');
 
 const userSchema = mongoose.Schema({
     name: {
@@ -15,3 +15,4 @@ const userSchema = mongoose.Schema({
         required: true,
     }
 });
+module.exports =  mongoose.model('user', userSchema);

@@ -6,7 +6,19 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body>  
+    <div class="w-full h-screen bg-zinc-900 p-10 text-white">
+        <h1 class="text-4xl font-bold text-center tracking-tighter mb-5">Create a new User</h1>
+        <hr>
+        <form action="/create" method="post" class="sm:gap-4 sm:flex-none flex flex-col gap-3 pt-4 sm:w-1/2 sm:mx-auto container">
+                <input type="text" name="name" id="name" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none" placeholder="Enter your Name..." required>
+                <input type="text" name="email" id="email" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none" placeholder="Enter your Email..."required />
+                <input type="text" name="imageUrl" id="imageUrl" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none" placeholder="Enter your Url..." required/>
+                <input type="submit" value="Create" class="px-5 py-2 border-2 border-zinc-700 p-10 rounded-lg bg-transparent outline-none  hover:bg-yellow-600 transition-colors ease-in-out duration-300 hover:cursor-pointer" onclick="alert('User Created')" />
+        </form>
+
+        <a href="/read" class="w-fit flex justify-end mt-10 sm:mt-32 sm:mr-32 text-blue-950 p-3 bg-yellow-500 rounded">All Users <svg aria-hidden="true" data-prefix="fal" data-icon="arrow-alt-from-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-alt-from-left fa-w-14 fa-7x ml-3" height="24" width="24"><path fill="currentColor" d="M0 436V76c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v360c0 6.6-5.4 12-12 12h-8c-6.6 0-12-5.4-12-12zm96-218.9v77.7c0 8.8 7.2 16 16 16h144v93.9c0 7.1 8.6 10.7 13.6 5.7l141.6-143.1c6.3-6.3 6.3-16.4 0-22.7l-141.6-143c-5-5-13.6-1.5-13.6 5.7v93.9H112c-8.8-.1-16 7.1-16 15.9m-32 0c0-26.5 21.5-48 48-48h112v-61.9c0-35.6 43.1-53.4 68.2-28.3L433.9 222c18.8 18.8 18.8 49.2 0 68L292.2 433.1c-25.2 25.2-68.2 7.2-68.2-28.3v-61.9H112c-26.5 0-48-21.5-48-48v-77.8z" class=""></path></svg></a>
+    </div>
     <script src="./javascripts/script.js"></script>
 </body>
 </html>
