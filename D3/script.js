@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 // app.get(route, requestHandler)  In Case of Express, requestHandler is a MiddleWare Function
-
+// To read, we use requests(req) and to send, we use response(res)
 app.use((req, res, next) =>{
     console.log("MiddleWare Function first time");
     next();

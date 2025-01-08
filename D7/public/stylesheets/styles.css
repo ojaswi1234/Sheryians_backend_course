@@ -1,0 +1,32 @@
+#submit {
+    background: linear-gradient(to right, #4CAF50, #216125);
+    color: white;
+    padding: 14px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: 5px 7px 0 rgb(148, 215, 140);
+}
+#submit:hover {
+    background-color: #216125;
+    transition: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 2s;
+}
+form {
+    box-shadow: 0 0 52px 20px rgb(88, 240, 68);
+}
+input {
+    box-shadow: 5px 7px 0 0 rgb(88, 240, 68);
+}
+#user1 {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    background-clip: text;
+    color: transparent;
+}
+.clip-path-frustum {
+    clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+}
