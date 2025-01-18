@@ -1,0 +1,18 @@
+input {
+    box-shadow: 5px 7px 0 0 rgb(0, 119, 255);  
+}
+#submit {
+    background: linear-gradient(to top right, #4c75af, #213961);
+    color: white;
+    padding: 14px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: 5px 7px 0 rgb(140, 175, 215);
+}
+
+div{
+    background: radial-gradient(circle, #4c75af, #16233a);
+}

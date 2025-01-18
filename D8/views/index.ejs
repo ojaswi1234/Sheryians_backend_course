@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="stylesheets/styles.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="w-screen h-screen flex flex-col  bg-zinc-900 justify-center items-center overflow-x-hidden"> 
+        <form action="/register" method="post" class=" bg-zinc-800 sm:p-10 p-7 rounded-2xl border-2 border-zinc-400 text-zinc-100 flex flex-col items-center gap-10 sm:mt-24 ">
+            <h1 class=" text-2xl sm:text-4xl font-bold text-center text-green-500 flex flex-wrap -skew-x-12">Create a New User <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="size-16 -translate-y-5 ml-3 sm:ml-5 skew-x-12  " id="user1">
+                <!-- Define the gradient -->
+                <defs>
+                  <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#eecb05;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#c1ab1e;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#e97d2b;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <!-- Apply the gradient to the paths -->
+                <path fill="url(#myGradient)" d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+              </svg></h1>
+             
+            <input type="text" name="username" placeholder="UserName" class=" p-2 text-black outline-none text-center w-full -skew-x-12 ">
+            <input type="email" name="email" placeholder="Email" required class=" p-2 text-black outline-none text-center w-full -skew-x-12 ">
+            <input type="password" name="password" placeholder="Password" required class=" p-2 text-black outline-none text-center w-full -skew-x-12" maxlength="8">
+            <input type="submit" id="submit"  class="-skew-x-12" value="Create User" onclick="() => {alert('User Registered Successfully')}">
+            <hr class="bg-green-400 w-full p-0.5 rounded-full">
+        </form>
+        <a class="sm:w-44 sm:mb-20 flex bg-gradient-to-tr from-yellow-600 to-green-600 bg-clip-text text-transparent text-3xl inline translate-y-8 sm:translate-y-0 sm:translate-x-96 sm:ml-64 pb-14" href="/read">All Users <svg aria-hidden="true" data-prefix="fal" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-right fa-w-14 fa-7x size-10 ml-4"><path fill="yellow" d="M216.464 36.465l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L387.887 239H12c-6.627 0-12 5.373-12 12v10c0 6.627 5.373 12 12 12h375.887L209.393 451.494c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l211.051-211.05c4.686-4.686 4.686-12.284 0-16.971L233.434 36.465c-4.686-4.687-12.284-4.687-16.97 0z" class=""></path></svg></a>
+    </div>
+</body>
+</html>
