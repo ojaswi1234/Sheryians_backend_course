@@ -50,9 +50,9 @@
             <%= posts.content %>
           </p>
           <div class="btns flex flex-row gap-5 pt-2 font-bold ml-7">
-            <a href="#" class="text-yellow-500 flex justify-center items-center gap-2 ">Like</a>
-            <a href="#" class="text-green-500">Edit</a>
-            <a href="#" class="text-red-500">Delete</a>
+            <a href="#" class="text-yellow-500 ">Like</a>
+            <a href="edit/<%= posts._id %>" class="text-green-500">Edit</a>
+            <a href="delete/<%= posts._id %>" class="text-red-500">Delete</a>
           </div>
           </div>
 <% }) %>

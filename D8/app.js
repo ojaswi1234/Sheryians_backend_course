@@ -78,6 +78,21 @@ app.get('/logout', (res, req) => {
     res.redirect('/');
 });
 
+app.get('/edit/:id',isLoggedIn, async (req, res) => {
+   let post = await postModel.findOne({id: req.params.id});
+    res.render('edit', {post});
+});
+
+app.post('/edit/:id',isLoggedIn, async(req, res) => {
+    let post = await postModel.findOneAndUpdate({id: req.params.id}, {content: req.body.content});
+    res.redirect('/profile');
+});
+
+app.get('/delete/:id',isLoggedIn, async (req, res) => {
+    let post = await postModel.findOneAndDelete({id: req.params.id});
+    res.redirect('/profile');
+});
+
 function isLoggedIn(req, res, next) {
     if(req.cookies.token === ""){return res.redirect("/login"); alert("Please Login First");}
 
