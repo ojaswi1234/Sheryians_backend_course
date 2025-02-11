@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Profile Page</title>
+</head>
+<style>
+    #div1{
+        scrollbar-width:none;
+    }
+</style>
+<body class="bg-gradient-to-tr from-purple-500 to-red-500 min-h-screen text-gray-100 flex items-center justify-center p-4">
+  <div id="mainpage" class="w-full max-w-5xl bg-zinc-900 rounded-xl shadow-2xl overflow-hidden">
+    <div class="relative">
+     
+      <h1 class="text-center pt-16 pb-8 text-4xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-pink-500 w-fit place-self-center">
+        Profile Page
+      </h1>
+    </div>
+    <div id="div1" class="p-8 max-h-[70vh] overflow-y-auto">
+      <a href="/logout" class="p-2 bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 transition duration-300 flex justify-self-end ">
+        Logout
+      </a>
+      <h2 class="text-2xl sm:text-3xl text-center sm:text-left mb-8">
+        Hey There, <span class="font-bold bg-gradient-to-br from-pink-400 to-yellow-400 bg-clip-text text-transparent"><%= user.username %></span>
+      </h2>
+     
+      <div class="flex justify-center sm:justify-center mb-10">
+        <form action="/post" method="post" class="flex flex-col items-center w-full max-w-2xl bg-zinc-800 p-6 rounded-2xl shadow-lg">
+          <span class="text-lg font-medium mb-4">Create New Post</span>
+          <textarea name="content" id="input-form" placeholder="Create New Post from here..." class="w-full h-40 p-4 mb-4 text-base bg-transparent border-2 border-zinc-700 rounded-lg focus:border-blue-400 focus:outline-none transition-colors duration-300 resize-none"></textarea>
+          <button type="submit" class="w-full bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 transition-all duration-300 py-2">Post</button>
+        </form>
+      </div>
+      <div id="form-container" class="w-full flex justify-center"></div>
+      <div class="mt-10">
+        <h2 class="mb-6 text-3xl font-bold text-transparent bg-gradient-to-l from-red-500 to-purple-500 bg-clip-text">
+          Your Posts
+        </h2>
+        
+        <div class="bg-zinc-800 p-6 rounded-2xl shadow-lg flex flex-col gap-5">
+          <% user.posts.reverse().forEach(function(posts){ %>
+          <div class="bg-zinc-900 p-6 rounded-2xl">
+          <h3 class="text-lg mb-2 font-bold">
+            by <span class="text-blue-400">@<%= user.username %></span>
+          </h3>
+          <p class="text-base tracking-tight ml-5">
+            <%= posts.content %>
+          </p>
+          <div class="btns flex flex-row gap-5 pt-2 font-bold ml-7">
+            <a href="#" class="text-yellow-500 flex justify-center items-center gap-2 ">Like</a>
+            <a href="#" class="text-green-500">Edit</a>
+            <a href="#" class="text-red-500">Delete</a>
+          </div>
+          </div>
+<% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

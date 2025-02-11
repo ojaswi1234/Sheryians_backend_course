@@ -19,9 +19,38 @@ app.get('/', (req,res) => {
 app.get('/login', (req,res) => {
     res.render('login');
 });
+app.post('/login', async (req, res) => {
+    let user = await userModel.findOne({email: req.body.email});
+    if(!user) return res.status(400).send("User Not Found!");
+    else{
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+            if(result){
+                let token = jwt.sign({email: user.email}, "se#ret");
+                res.cookie("token", token);
+                res.redirect("/profile");
+            }else{
+                res.send("Invalid Email or password! Please Try Again")
+            }
+        }); 
+    }
+});
 
-app.get('/profile', (req, res) => {
+app.post('/post', isLoggedIn, async (req, res) => {
+    let user = await userModel.findOne({email: req.user.email});
+    if (!user) return res.status(400).send("User Not Found!");
 
+    let post = await postModel.create({
+        user: user._id,
+        content: req.body.content,
+    });
+    user.posts.push(post._id);
+    await user.save();
+    res.redirect('/profile');
+});
+
+app.get('/profile',isLoggedIn, async (req, res) => {
+    let user = await userModel.findOne({email: req.user.email}).populate("posts");
+    res.render('profile', {user});
 });
 
 app.post('/register',(req, res) => {
@@ -42,14 +71,23 @@ app.post('/register',(req, res) => {
     res.cookie('token', token);
     res.send('User Registered');
     res.redirect('/register');
-})
-app.get('/logout', (req,res) => {
+});
 
+app.get('/logout', (res, req) => {
+    res.cookies("token", "");
+    res.redirect('/');
 });
 
 function isLoggedIn(req, res, next) {
+    if(req.cookies.token === ""){return res.redirect("/login"); alert("Please Login First");}
 
+    else{
+        let data = jwt.verify(req.cookies.token, "se#ret");
+        req.user = data;
+        next();
+    }
 };
 app.listen(3000 , () => {
     console.log('Server is running on port 3000');
+    console.log("app link: http://localhost:3000");
 });

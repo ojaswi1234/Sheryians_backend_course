@@ -13,6 +13,30 @@ input {
     box-shadow: 5px 7px 0 rgb(140, 175, 215);
 }
 
-div{
+div {
     background: radial-gradient(circle, #4c75af, #16233a);
+}
+
+img {
+    image-rendering: pixelated;
+    image-orientation: 30deg;
+}
+
+#h {
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: hue 2s ease-in-out infinite alternate-reverse;; 
+}
+
+@keyframes hue {
+    0% {
+        filter: hue-rotate(30deg);
+    }
+    50% {
+        filter: hue-rotate(60deg);
+    }
+    100% {
+        filter: hue-rotate(180deg);
+    }
 }

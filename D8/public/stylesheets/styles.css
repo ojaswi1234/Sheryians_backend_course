@@ -18,8 +18,7 @@
 }
 
 input {
-    box-shadow: 5px 7px 0 0 rgb(88, 240, 68);
-    
+    box-shadow: 5px 7px 0 0 rgb(88, 240, 68);  
 }
 #user1 {
     background: linear-gradient(to right, #ff7e5f, #feb47b);
