@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+    .board {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        width: 100%;
+        height: 100%;
+    }
+    .square {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .light {
+        background-color: #f0d9b5;
+    }
+    .dark {
+        background-color: #b58863;
+    }
+    .piece {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .white {
+        color: white;
+    }
+    .black {
+        color: black;
+    }
+    .piece::before {
+        content: attr(data-piece);
+        font-size: 2em;
+    }
+    .piece.white::before {
+        color: white;
+    }
+</style>
+<body class="w-screen h-screen p-2 bg-gradient-to-tr from-yellow-500 to-white flex items-center justify-center">
+    <main class="w-full h-full bg-zinc-900 flex items-center justify-center rounded-2xl text-white">
+        <div class="flex flex-col items-center justify-center">
+            <h1 class="text-4xl font-bold mb-4">Chess Game</h1>
+            <div class="board w-[500px] h-[500px] border border-gray-800 border-yellow-200"></div>
+        </div>
+    </main>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const socket = io();
+        const chess = new Chess();
+        const boardElement = document.querySelector('.board');
+
+        let draggedPiece = null;
+        let sourceSquare = null;
+        let playerRole = null;
+
+        const renderBoard = () => {
+            const board = chess.board();
+            boardElement.innerHTML = '';
+            board.forEach((row, rowIndex) => {
+                row.forEach((square, squareIndex) => {
+                    const squareList = document.createElement('div');
+                    squareList.classList.add('square', (rowIndex + squareIndex) % 2 === 0 ? 'light' : 'dark');
+                    squareList.dataset.row = rowIndex;
+                    squareList.dataset.col = squareIndex;
+
+                    if (square) {
+                        const pieceElement = document.createElement('div');
+                        pieceElement.classList.add('piece', square.color === 'w' ? 'white' : 'black');
+                        pieceElement.innerHTML = getPieceUnicode(square);
+                        pieceElement.draggable = playerRole === square.color;
+
+                        pieceElement.addEventListener('dragstart', (e) => {
+                            if (pieceElement.draggable) {
+                                draggedPiece = pieceElement;
+                                sourceSquare = { row: rowIndex, col: squareIndex };
+                                e.dataTransfer.setData('text/plain', '');
+                            }
+                        });
+
+                        pieceElement.addEventListener('dragend', () => {
+                            draggedPiece = null;
+                            sourceSquare = null;
+                        });
+
+                        squareList.appendChild(pieceElement);
+                    }
+
+                    squareList.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                    });
+
+                    squareList.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        if (draggedPiece) {
+                            const targetSquare = {
+                                row: parseInt(squareList.dataset.row),
+                                col: parseInt(squareList.dataset.col)
+                            };
+                            handleMove(sourceSquare, targetSquare);
+                        }
+                    });
+
+                    boardElement.appendChild(squareList);
+                });
+            });
+        };
+
+        const handleMove = (source, target) => {
+            const move = {
+                from: `${String.fromCharCode(97 + source.col)}${8 - source.row}`,
+                to: `${String.fromCharCode(97 + target.col)}${8 - target.row}`,
+                promotion: 'q' // Always promote to queen for simplicity
+            };
+            socket.emit('move', move);
+        };
+
+        const getPieceUnicode = (piece) => {
+            const unicodePieces = {
+                'p': '♟', 'r': '♜', 'n': '♞', 'b': '♝', 'q': '♛', 'k': '♚',
+                'P': '♙', 'R': '♖', 'N': '♘', 'B': '♗', 'Q': '♕', 'K': '♔'
+            };
+            return unicodePieces[piece.type] || '';
+        };
+
+        socket.on('playerRole', (role) => {
+            playerRole = role;
+            renderBoard();
+        });
+
+        socket.on('spectator', () => {
+            playerRole = null;
+            renderBoard();
+        });
+
+        socket.on('boardState', (fen) => {
+            chess.load(fen);
+            renderBoard();
+        });
+
+        socket.on('move', (move) => {
+            chess.move(move);
+            renderBoard();
+        });
+
+        socket.on('invalidMove', (move) => {
+            console.log('Invalid move:', move);
+            alert('Invalid move! Please try again.');
+        });
+
+        renderBoard();
+    </script>
+</body>
+</html>
