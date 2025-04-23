@@ -29,7 +29,7 @@
         background-color: #f0d9b5;
     }
     .dark {
-        background-color: #b58863;
+        background-color: #7a471d;
     }
     .piece {
         width: 100%;
@@ -37,9 +37,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 2em;
+        cursor: grab;
     }
     .white {
-        color: white;
+        color: rgb(255, 254, 254);
+        
     }
     .black {
         color: black;
@@ -55,7 +58,7 @@
 <body class="w-screen h-screen p-2 bg-gradient-to-tr from-yellow-500 to-white flex items-center justify-center">
     <main class="w-full h-full bg-zinc-900 flex items-center justify-center rounded-2xl text-white">
         <div class="flex flex-col items-center justify-center">
-            <h1 class="text-4xl font-bold mb-4">Chess Game</h1>
+            <h1 class="text-4xl font-bold mb-4 text-transparent bg-gradient-to-r from-yellow-500 to-white bg-clip-text">Chess Game</h1>
             <div class="board w-[500px] h-[500px] border border-gray-800 border-yellow-200"></div>
         </div>
     </main>
@@ -79,12 +82,16 @@
                     squareList.classList.add('square', (rowIndex + squareIndex) % 2 === 0 ? 'light' : 'dark');
                     squareList.dataset.row = rowIndex;
                     squareList.dataset.col = squareIndex;
+                    
 
                     if (square) {
                         const pieceElement = document.createElement('div');
+                       
                         pieceElement.classList.add('piece', square.color === 'w' ? 'white' : 'black');
                         pieceElement.innerHTML = getPieceUnicode(square);
                         pieceElement.draggable = playerRole === square.color;
+        
+                        
 
                         pieceElement.addEventListener('dragstart', (e) => {
                             if (pieceElement.draggable) {
@@ -116,7 +123,7 @@
                             handleMove(sourceSquare, targetSquare);
                         }
                     });
-
+                    
                     boardElement.appendChild(squareList);
                 });
             });
@@ -136,6 +143,7 @@
                 'p': '♟', 'r': '♜', 'n': '♞', 'b': '♝', 'q': '♛', 'k': '♚',
                 'P': '♙', 'R': '♖', 'N': '♘', 'B': '♗', 'Q': '♕', 'K': '♔'
             };
+           
             return unicodePieces[piece.type] || '';
         };
 
